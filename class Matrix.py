@@ -13,8 +13,24 @@ class Matrix:
         res = '\n'.join(temp_res)
         return res
 
+    def __add__(self, other):
+        res = deepcopy(self.lst)
+        for i, n in enumerate(self.lst):
+            for j, m in enumerate(n):
+                res[i][j] = self.lst[i][j] + other.lst[i][j]
+        return Matrix(res)
+
+    def __mul__(self, other):
+        res = deepcopy(self.lst)
+        for i, n in enumerate(self.lst):
+            for j, m in enumerate(n):
+                res[i][j] = self.lst[i][j] * other
+        return Matrix(res)
+
+    __rmul__ = __mul__
+
     def size(self):
         return len(self.lst), len(self.lst[0])
 
 
-#  exec(stdin.read())
+exec(stdin.read())
