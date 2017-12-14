@@ -43,5 +43,13 @@ class Matrix:
     def size(self):
         return len(self.lst), len(self.lst[0])
 
+    def transpose(self):
+        self.lst = list(zip(*self.lst))
+        return self
+
+    @staticmethod
+    def transposed(obj):
+        return Matrix(list(zip(*obj.lst)))
+
 
 exec(stdin.read())
