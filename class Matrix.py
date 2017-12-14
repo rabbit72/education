@@ -2,6 +2,12 @@ from sys import stdin
 from copy import deepcopy
 
 
+class MatrixError(BaseException):
+    def __init__(self, matrix1, matrix2):
+        self.matrix1 = matrix1
+        self.matrix2 = matrix2
+
+
 class Matrix:
     def __init__(self, lst):
         self.lst = deepcopy(lst)
@@ -14,11 +20,16 @@ class Matrix:
         return res
 
     def __add__(self, other):
-        res = deepcopy(self.lst)
-        for i, n in enumerate(self.lst):
-            for j, m in enumerate(n):
-                res[i][j] = self.lst[i][j] + other.lst[i][j]
-        return Matrix(res)
+        if self.size() == other.size():
+            res = []
+            for i, n in enumerate(self.lst):
+                res.append([])
+                for j, m in enumerate(n):
+                    res[i].append(self.lst[i][j] + other.lst[i][j])
+            return Matrix(res)
+        else:
+            error = MatrixError(self, other)
+            raise error
 
     def __mul__(self, other):
         res = deepcopy(self.lst)
