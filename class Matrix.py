@@ -32,10 +32,11 @@ class Matrix:
             raise error
 
     def __mul__(self, other):
-        res = deepcopy(self.lst)
+        res = []
         for i, n in enumerate(self.lst):
+            res.append([])
             for j, m in enumerate(n):
-                res[i][j] = self.lst[i][j] * other
+                res[i].append(self.lst[i][j] * other)
         return Matrix(res)
 
     __rmul__ = __mul__
